@@ -4,234 +4,862 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastel Anime Dress Up 🎀</title>
+<title>Anime Dream Boutique ♡</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap');
+
+:root{
+ --pink:#f5b9d2;
+ --purple:#c9b5ed;
+ --mint:#c4e9dc;
+ --cream:#fff9f5;
+ --ink:#735a79;
+}
 *{box-sizing:border-box}
 body{
  margin:0;
- font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#ffe6f2,#eee5ff,#e3fff4);
- color:#805f8e;
+ font-family:Nunito,sans-serif;
+ color:var(--ink);
+ background:#fff5fa;
+ background-image:
+ radial-gradient(#eac9df 1px,transparent 1px);
+ background-size:22px 22px;
+}
+header{
  text-align:center;
+ padding:25px 12px 18px;
+ background:linear-gradient(120deg,#ffe2ee,#eee5ff,#e3f8ed);
 }
-header{padding:25px}
-h1{color:#ce83b2}
-.game{
- display:flex;
- flex-wrap:wrap;
- justify-content:center;
- gap:25px;
+.logo{
+ font-family:"Playfair Display",serif;
+ font-size:clamp(27px,5vw,42px);
+ color:#bd79a4;
+ margin:0;
+}
+header p{margin:7px 0;color:#9a7a9e}
+.container{
+ max-width:1250px;
+ margin:auto;
  padding:20px;
 }
-.character,.wardrobe{
- background:#ffffffc9;
- border:3px solid white;
- border-radius:25px;
- padding:20px;
- width:min(100%,420px);
- box-shadow:0 5px 20px #c9a4cf55;
-}
-.character svg{width:100%;max-width:300px}
-.options{
+.topbar{
  display:flex;
+ justify-content:space-between;
+ align-items:center;
  flex-wrap:wrap;
- justify-content:center;
  gap:10px;
- margin-bottom:20px;
+ margin-bottom:18px;
+}
+.topbar h2{margin:0;color:#ad80ae}
+.pill{
+ background:white;
+ border:1px solid #f1d8e9;
+ border-radius:30px;
+ padding:9px 15px;
+ font-size:13px;
+ font-weight:800;
+}
+.workspace{
+ display:grid;
+ grid-template-columns:minmax(280px,1fr) minmax(320px,1.15fr);
+ gap:20px;
+ align-items:start;
+}
+.panel{
+ background:#ffffffeb;
+ border:2px solid white;
+ border-radius:25px;
+ box-shadow:0 10px 30px #d5a9c622;
+ padding:18px;
+}
+.panel-title{
+ font-family:"Playfair Display",serif;
+ color:#bd83ae;
+ text-align:center;
+ margin:4px 0 15px;
+ font-size:23px;
+}
+.stage{
+ position:relative;
+ border-radius:22px;
+ overflow:hidden;
+ background:linear-gradient(155deg,#fbe1ef,#eee5ff 60%,#e1f5ed);
+ min-height:560px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+.stage:before,.stage:after{
+ content:"✿";
+ position:absolute;
+ font-size:50px;
+ color:#fff;
+ opacity:.65;
+}
+.stage:before{top:20px;left:20px}
+.stage:after{bottom:20px;right:20px}
+#girl{
+ width:100%;
+ max-width:385px;
+ height:550px;
+ position:relative;
+ z-index:1;
+}
+.character-name{
+ text-align:center;
+ font-family:"Playfair Display",serif;
+ color:#ad78a8;
+ font-size:21px;
+ margin:12px 0 3px;
+}
+.character-sub{
+ text-align:center;
+ font-size:12px;
+ color:#ad92ad;
+}
+.characters{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:9px;
+ margin-top:15px;
+}
+.characters button{
+ background:#f9e8f1;
+ border:2px solid transparent;
+}
+.characters button.active{
+ border-color:#c58ab7;
+ background:#f3d7e9;
+}
+.controls{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+ justify-content:center;
+ margin-top:15px;
 }
 button{
  border:0;
- padding:12px 16px;
- border-radius:15px;
- background:#f7d8eb;
- color:#805f8e;
- font-weight:bold;
+ border-radius:14px;
+ padding:10px 14px;
+ font-family:inherit;
+ font-weight:800;
+ color:#805f87;
+ background:#f8e5f0;
  cursor:pointer;
+ transition:.2s;
 }
-button:hover{background:#eac2e0;transform:scale(1.05)}
-h3{color:#bd83b0}
-#message{font-weight:bold;color:#bd83b0}
+button:hover{
+ transform:translateY(-2px);
+ filter:brightness(.97);
+}
+.primary{background:#e9d9fa}
+.mint{background:#ddf3e9}
+.darkpink{background:#f4c9df}
+.tabs{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:7px;
+ margin-bottom:15px;
+}
+.tab{
+ background:#f7eef7;
+ padding:10px 12px;
+ font-size:12px;
+}
+.tab.active{
+ background:#d9c6f0;
+ color:#674b7d;
+}
+.wardrobe{
+ min-height:400px;
+}
+.wardrobe-title{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:13px;
+}
+.wardrobe-title h3{
+ margin:0;
+ font-family:"Playfair Display",serif;
+ color:#ad80ae;
+}
+.item-count{font-size:12px;color:#b19ab2}
+.items{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:10px;
+}
+.item{
+ min-height:100px;
+ background:linear-gradient(145deg,#fff6fb,#f6f0ff);
+ border:2px solid white;
+ border-radius:17px;
+ padding:12px 5px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ gap:7px;
+}
+.item.selected{
+ border-color:#d4a2c9;
+ background:#f9e4f1;
+}
+.item .emoji{font-size:29px}
+.item .item-name{font-size:11px}
+.color-section{
+ border-top:1px solid #f1e1ed;
+ margin-top:18px;
+ padding-top:15px;
+}
+.color-section h4{margin:0 0 10px;color:#a77da7}
+.swatches{
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+}
+.swatch{
+ width:31px;height:31px;
+ border-radius:50%;
+ border:3px solid white;
+ box-shadow:0 0 0 1px #e5d4e5;
+ padding:0;
+}
+.swatch.active{outline:2px solid #a77da7}
+.message{
+ text-align:center;
+ margin:13px 0 0;
+ min-height:22px;
+ color:#b17fa9;
+ font-weight:800;
+ font-size:13px;
+}
+footer{
+ text-align:center;
+ padding:25px;
+ color:#ac8da9;
+ font-size:13px;
+}
+@media(max-width:760px){
+ .workspace{grid-template-columns:1fr}
+ .stage{min-height:510px}
+ #girl{height:500px}
+ .container{padding:12px}
+}
+@media(max-width:380px){
+ .items{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>♡ Pastel Anime Fashion ♡</h1>
-<p>Create your dream anime outfit!</p>
+ <h1 class="logo">♡ Anime Dream Boutique ♡</h1>
+ <p>Your little magical world of fashion, beauty & dreams</p>
 </header>
 
-<div class="game">
+<div class="container">
 
-<div class="character">
-<h2>Your Anime Girl 🎀</h2>
+ <div class="topbar">
+  <h2>✨ Fashion Studio</h2>
+  <span class="pill">♡ Dress up your dream girl ♡</span>
+ </div>
 
-<svg id="girl" viewBox="0 0 300 430">
+ <div class="workspace">
 
-<!-- Hair behind -->
-<path id="hairBack"
-d="M80 130 Q50 15 150 25 Q250 15 220 130
-L225 300 Q190 320 190 150 L110 150 Q110 320 75 300Z"
-fill="#A879C9"/>
+  <!-- CHARACTER PANEL -->
+  <section class="panel">
+   <h2 class="panel-title">Your Anime Model</h2>
 
-<!-- Neck -->
-<rect x="135" y="185" width="30" height="55" rx="10" fill="#FFE0CE"/>
+   <div class="stage">
+    <svg id="girl" viewBox="0 0 360 600"
+      xmlns="http://www.w3.org/2000/svg">
 
-<!-- Face -->
-<ellipse cx="150" cy="125" rx="65" ry="80" fill="#FFE0CE"/>
+     <defs>
+      <linearGradient id="skin" x2="0" y2="1">
+       <stop offset="0" stop-color="#ffe8d9"/>
+       <stop offset="1" stop-color="#f4c5ad"/>
+      </linearGradient>
+      <linearGradient id="hair" x2="0" y2="1">
+       <stop offset="0" stop-color="#a77ac7"/>
+       <stop offset="1" stop-color="#684a83"/>
+      </linearGradient>
+      <linearGradient id="fabric" x2="0" y2="1">
+       <stop offset="0" stop-color="#fff0f7"/>
+       <stop offset="1" stop-color="#e9a9cd"/>
+      </linearGradient>
+     </defs>
 
-<!-- Eyes -->
-<ellipse cx="125" cy="135" rx="10" ry="14" fill="#76518E"/>
-<ellipse cx="175" cy="135" rx="10" ry="14" fill="#76518E"/>
-<circle cx="128" cy="131" r="4" fill="white"/>
-<circle cx="178" cy="131" r="4" fill="white"/>
+     <!-- Hair behind -->
+     <g id="backHair">
+      <path d="M90 155 Q45 40 170 40 Q290 25 280 170
+       L300 425 Q270 475 250 420 L240 205
+       L105 205 L95 425 Q65 465 55 410Z"
+       fill="url(#hair)"/>
+     </g>
 
-<!-- Blush -->
-<ellipse cx="105" cy="160" rx="13" ry="6" fill="#F5A6B5"/>
-<ellipse cx="195" cy="160" rx="13" ry="6" fill="#F5A6B5"/>
+     <!-- Legs -->
+     <g id="legs">
+      <path d="M135 385 Q130 445 123 515
+       L115 548 Q140 560 160 548
+       L165 440 L180 440 L195 548
+       Q220 560 243 548 L225 385Z"
+       fill="url(#skin)"/>
+      <path d="M120 535 Q135 545 160 540
+       L160 552 Q145 570 108 557Z"
+       fill="#e9b9a9"/>
+      <path d="M193 540 Q220 550 240 535
+       L250 557 Q220 570 194 552Z"
+       fill="#e9b9a9"/>
+     </g>
 
-<!-- Mouth -->
-<path d="M140 175 Q150 185 160 175" fill="none" stroke="#B76C75" stroke-width="3"/>
+     <!-- Shoes -->
+     <g id="shoes">
+      <path d="M108 550 Q130 548 157 552
+       L165 566 Q163 579 102 577
+       Q95 567 108 550Z"
+       fill="#efb1d1" stroke="#c77fa9" stroke-width="2"/>
+      <path d="M195 552 Q225 550 246 550
+       Q266 567 255 577
+       Q195 581 192 567Z"
+       fill="#efb1d1" stroke="#c77fa9" stroke-width="2"/>
+      <path d="M111 564 Q137 570 161 565
+       M200 565 Q230 570 257 563"
+       stroke="white" stroke-width="3" fill="none"/>
+     </g>
 
-<!-- Front hair -->
-<path id="hairFront"
-d="M85 120 Q65 15 150 25 Q235 15 215 120
-Q190 80 170 95 Q150 60 130 95 Q105 80 85 120Z"
-fill="#A879C9"/>
+     <!-- Body -->
+     <path d="M145 235 L140 295 L115 350
+       L245 350 L220 295 L215 235Z"
+       fill="url(#skin)"/>
 
-<!-- Arms -->
-<path d="M120 225 L95 295 M180 225 L205 295"
-stroke="#FFE0CE" stroke-width="20" stroke-linecap="round"/>
+     <!-- Arms -->
+     <g id="arms">
+      <path d="M137 260 Q110 275 105 330
+       L91 405 Q90 420 103 422
+       Q117 420 120 399 L150 315Z"
+       fill="url(#skin)"/>
+      <path d="M223 260 Q250 275 255 330
+       L269 405 Q270 420 257 422
+       Q243 420 240 399 L210 315Z"
+       fill="url(#skin)"/>
+      <path d="M91 402 Q100 412 116 407"
+       stroke="#e7ae9b" stroke-width="2" fill="none"/>
+      <path d="M244 407 Q260 412 270 402"
+       stroke="#e7ae9b" stroke-width="2" fill="none"/>
+     </g>
 
-<!-- Dress -->
-<path id="dress"
-d="M120 215 L180 215 L220 330 L80 330Z"
-fill="#F4AFCB"/>
+     <!-- Neck -->
+     <path d="M153 190 L207 190 L207 264
+       Q180 290 153 264Z" fill="url(#skin)"/>
 
-<!-- Legs -->
-<path d="M125 330 L120 390 M175 330 L180 390"
-stroke="#FFE0CE" stroke-width="22" stroke-linecap="round"/>
+     <!-- Face -->
+     <path id="face"
+      d="M99 118 Q100 55 180 57
+       Q260 55 261 118
+       L251 178 Q242 243 180 254
+       Q118 243 109 178Z"
+      fill="url(#skin)"/>
 
-<!-- Shoes -->
-<ellipse id="shoe1" cx="120" cy="395" rx="23" ry="11" fill="#F1A7C8"/>
-<ellipse id="shoe2" cx="180" cy="395" rx="23" ry="11" fill="#F1A7C8"/>
+     <!-- Ears -->
+     <ellipse cx="103" cy="159" rx="13" ry="23" fill="#f6c9b5"/>
+     <ellipse cx="257" cy="159" rx="13" ry="23" fill="#f6c9b5"/>
 
-<!-- Bow -->
-<g id="bow">
-<path d="M95 90 Q65 55 80 105 L110 110Z" fill="#FF8FB8"/>
-<path d="M110 110 Q145 55 145 95 L120 120Z" fill="#FF8FB8"/>
-<circle cx="110" cy="105" r="9" fill="#F5D98E"/>
-</g>
+     <!-- Eyes -->
+     <g id="eyes">
+      <path d="M120 148 Q143 119 160 148
+       Q145 176 122 156Z" fill="#73518f"/>
+      <path d="M200 148 Q220 119 240 148
+       Q237 176 215 156Z" fill="#73518f"/>
+      <ellipse cx="141" cy="149" rx="7" ry="12" fill="#342b48"/>
+      <ellipse cx="219" cy="149" rx="7" ry="12" fill="#342b48"/>
+      <circle cx="143" cy="145" r="4" fill="white"/>
+      <circle cx="221" cy="145" r="4" fill="white"/>
+      <path d="M118 145 Q138 118 162 144
+       M198 144 Q221 118 242 145"
+       fill="none" stroke="#553b64" stroke-width="4"
+       stroke-linecap="round"/>
+      <path d="M130 178 Q144 188 157 178
+       M203 178 Q216 188 231 178"
+       stroke="#ee9eb1" stroke-width="5"
+       stroke-linecap="round" fill="none" opacity=".55"/>
+     </g>
 
-</svg>
+     <!-- Nose and lips -->
+     <path d="M178 170 L174 184 Q180 190 186 184"
+      stroke="#d79b92" stroke-width="2" fill="none"/>
+     <path d="M169 204 Q180 214 191 204
+      Q181 219 169 204Z" fill="#c66f8b"/>
 
-<button onclick="randomStyle()">✨ Random Outfit</button>
-<button onclick="resetStyle()">↻ Reset</button>
-<button onclick="saveGirl()">💖 Save Image</button>
+     <!-- Makeup details -->
+     <circle cx="112" cy="185" r="12" fill="#f49eaf" opacity=".25"/>
+     <circle cx="248" cy="185" r="12" fill="#f49eaf" opacity=".25"/>
+
+     <!-- Top clothing -->
+     <g id="top">
+      <path d="M145 252 Q180 278 215 252
+       L239 320 Q225 350 210 370
+       L150 370 Q135 350 121 320Z"
+       fill="#f3c4dd" stroke="#d49abd" stroke-width="2"/>
+      <path d="M145 252 Q180 285 215 252
+       M155 285 L180 310 L205 285"
+       fill="none" stroke="white" stroke-width="4"/>
+      <path d="M180 315 L180 354"
+       stroke="#fff" stroke-width="3"/>
+      <circle cx="180" cy="328" r="3" fill="#d69abf"/>
+      <circle cx="180" cy="343" r="3" fill="#d69abf"/>
+     </g>
+
+     <!-- Bottom clothing -->
+     <g id="bottom">
+      <path d="M125 365 Q180 380 235 365
+       L252 443 Q180 460 108 443Z"
+       fill="#bda7e8" stroke="#9e83ce" stroke-width="2"/>
+      <path d="M180 375 L180 450"
+       stroke="white" stroke-width="2" opacity=".7"/>
+     </g>
+
+     <!-- Dress overlay -->
+     <g id="dress" style="display:none">
+      <path d="M142 252 Q180 280 218 252
+       Q244 300 265 450
+       Q180 480 95 450
+       Q116 300 142 252Z"
+       fill="#f4b7d2" stroke="#d895b7" stroke-width="3"/>
+      <path d="M125 370 Q180 395 235 370"
+       stroke="white" stroke-width="4" fill="none"/>
+      <path d="M180 280 L180 455"
+       stroke="white" stroke-width="2" opacity=".6"/>
+      <circle cx="180" cy="305" r="6" fill="#fff1d5"/>
+     </g>
+
+     <!-- Outer jacket -->
+     <g id="jacket" style="display:none">
+      <path d="M145 250 L125 260 L110 355
+       L145 370 L160 310Z"
+       fill="#c6b0e7" stroke="#9b83c3" stroke-width="2"/>
+      <path d="M215 250 L235 260 L250 355
+       L215 370 L200 310Z"
+       fill="#c6b0e7" stroke="#9b83c3" stroke-width="2"/>
+      <path d="M150 263 L180 290 L210 263"
+       stroke="white" stroke-width="3" fill="none"/>
+     </g>
+
+     <!-- Hair front -->
+     <g id="frontHair">
+      <path d="M101 145 Q75 45 165 35
+       Q275 25 260 150
+       Q242 112 218 120
+       Q199 89 180 118
+       Q153 83 139 125
+       Q117 112 101 145Z"
+       fill="url(#hair)"/>
+      <path d="M110 120 Q100 90 122 68
+       M250 115 Q260 78 240 57"
+       stroke="#ffffff" stroke-width="5"
+       opacity=".18" fill="none"/>
+     </g>
+
+     <!-- Hairstyle decorations -->
+     <g id="hairExtras"></g>
+
+     <!-- Accessories -->
+     <g id="accessories"></g>
+
+    </svg>
+   </div>
+
+   <div class="character-name" id="girlName">Miyuki Sakura</div>
+   <div class="character-sub">Fashion Model · Tokyo Dream Collection</div>
+
+   <div class="characters">
+    <button class="active" data-character="0">🌸 Miyuki</button>
+    <button data-character="1">🦋 Yuna</button>
+    <button data-character="2">🌷 Hikari</button>
+   </div>
+
+   <div class="controls">
+    <button class="primary" id="random">✨ Random Look</button>
+    <button class="mint" id="reset">↻ Reset</button>
+    <button class="darkpink" id="save">📸 Save Look</button>
+   </div>
+   <p class="message" id="message">Welcome to your dream boutique! ♡</p>
+  </section>
+
+  <!-- WARDROBE PANEL -->
+  <section class="panel wardrobe">
+   <h2 class="panel-title">♡ Fashion Wardrobe ♡</h2>
+
+   <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="dresses">👗 Dresses</button>
+    <button class="tab" data-tab="tops">👚 Tops</button>
+    <button class="tab" data-tab="bottoms">👖 Bottoms</button>
+    <button class="tab" data-tab="jackets">🧥 Jackets</button>
+    <button class="tab" data-tab="hair">💇 Hair</button>
+    <button class="tab" data-tab="shoes">👠 Shoes</button>
+    <button class="tab" data-tab="accessories">💍 Extras</button>
+   </div>
+
+   <div class="wardrobe-title">
+    <h3 id="categoryTitle">Dream Dresses</h3>
+    <span class="item-count" id="itemCount">8 styles</span>
+   </div>
+
+   <div class="items" id="items"></div>
+
+   <div class="color-section">
+    <h4>🎨 Choose your color</h4>
+    <div class="swatches" id="swatches"></div>
+   </div>
+  </section>
+ </div>
 </div>
 
-<div class="wardrobe">
-<h2>♡ Fashion Wardrobe ♡</h2>
-
-<h3>👗 Dresses</h3>
-<div class="options">
-<button onclick="change('dress','#F4AFCB')">Pink</button>
-<button onclick="change('dress','#BDA7E8')">Purple</button>
-<button onclick="change('dress','#A9DCCB')">Mint</button>
-<button onclick="change('dress','#F5D98E')">Yellow</button>
-<button onclick="change('dress','#FFFFFF')">White</button>
-</div>
-
-<h3>💇 Hair</h3>
-<div class="options">
-<button onclick="change('hair','#A879C9')">Purple</button>
-<button onclick="change('hair','#E8A66A')">Blonde</button>
-<button onclick="change('hair','#49343D')">Black</button>
-<button onclick="change('hair','#E88CA5')">Pink</button>
-</div>
-
-<h3>👠 Shoes</h3>
-<div class="options">
-<button onclick="change('shoes','#F1A7C8')">Pink</button>
-<button onclick="change('shoes','#BDA7E8')">Purple</button>
-<button onclick="change('shoes','#A9DCCB')">Mint</button>
-<button onclick="change('shoes','#FFFFFF')">White</button>
-</div>
-
-<h3>🎀 Accessories</h3>
-<div class="options">
-<button onclick="change('bow','#FF8FB8')">Pink Bow</button>
-<button onclick="change('bow','#BDA7E8')">Purple Bow</button>
-<button onclick="change('bow','#F5D98E')">Gold Bow</button>
-<button onclick="change('bow','#A9DCCB')">Mint Bow</button>
-</div>
-
-<p id="message">Welcome to your fashion studio! ♡</p>
-</div>
-</div>
-
-<footer>Made with ♡ Pastel Anime Fashion Studio</footer>
+<footer>
+ ♡ Anime Dream Boutique · Designed with love and pastel magic ♡
+</footer>
 
 <script>
-const defaults={
- dress:'#F4AFCB',
- hair:'#A879C9',
- shoes:'#F1A7C8',
- bow:'#FF8FB8'
+const $=id=>document.getElementById(id);
+
+const colors=[
+ "#f3aaca","#d6b9f2","#b8e4d5","#f7d995",
+ "#a9c9ef","#f5b8aa","#e9a7bd","#ffffff",
+ "#3e3549","#795c49","#d6a06e","#c7d2dc"
+];
+
+const characters=[
+ {name:"Miyuki Sakura",skin:"#ffe0ce",hair:"#a77ac7",eye:"#76518e"},
+ {name:"Yuna Hoshino",skin:"#f2c5a7",hair:"#d89c64",eye:"#578d9b"},
+ {name:"Hikari Moon",skin:"#f7d7c5",hair:"#493b55",eye:"#6a9c83"}
+];
+
+const hairStyles=[
+ {name:"Long Waves",emoji:"💜",back:"M90 155 Q45 40 170 40 Q290 25 280 170 L300 425 Q270 475 250 420 L240 205 L105 205 L95 425 Q65 465 55 410Z",
+ front:"M101 145 Q75 45 165 35 Q275 25 260 150 Q242 112 218 120 Q199 89 180 118 Q153 83 139 125 Q117 112 101 145Z"},
+ {name:"Short Bob",emoji:"💇",back:"M90 155 Q45 40 170 40 Q290 25 280 170 L275 290 Q240 320 235 220 L115 220 L110 290 Q65 320 55 270Z",
+ front:"M101 145 Q75 45 165 35 Q275 25 260 150 Q242 112 218 120 Q199 89 180 118 Q153 83 139 125 Q117 112 101 145Z"},
+ {name:"Twin Tails",emoji:"🎀",back:"M90 155 Q45 40 170 40 Q290 25 280 170 L310 440 Q285 480 265 430 L245 190 L105 190 L90 430 Q55 480 40 440Z",
+ front:"M101 145 Q75 45 165 35 Q275 25 260 150 Q242 112 218 120 Q199 89 180 118 Q153 83 139 125 Q117 112 101 145Z"},
+ {name:"Ponytail",emoji:"🌸",back:"M90 155 Q45 40 170 40 Q290 25 280 170 L300 280 Q320 340 270 400 L245 190 L105 190 L80 310Z",
+ front:"M101 145 Q75 45 165 35 Q275 25 260 150 Q242 112 218 120 Q199 89 180 118 Q153 83 139 125 Q117 112 101 145Z"},
+ {name:"Straight Hair",emoji:"✨",back:"M90 155 Q45 40 170 40 Q290 25 280 170 L290 490 L245 480 L240 190 L105 190 L100 480 L55 490Z",
+ front:"M100 140 Q75 40 165 35 Q275 25 260 145 L220 120 L190 120 L160 115 L130 125Z"}
+];
+
+const catalog={
+ dresses:[
+  ["Princess Dress","👗","#f3aaca"],
+  ["Lavender Dream","💜","#d6b9f2"],
+  ["Mint Princess","🌿","#b8e4d5"],
+  ["Sunshine Dress","🌼","#f7d995"],
+  ["Rose Party Dress","🌹","#e9a7bd"],
+  ["Snow White Dress","❄️","#ffffff"],
+  ["Blue Angel Dress","🦋","#a9c9ef"],
+  ["Peach Romance","🍑","#f5b8aa"]
+ ],
+ tops:[
+  ["Cute Blouse","🎀","#f3aaca"],
+  ["Off Shoulder","💕","#d6b9f2"],
+  ["School Shirt","📚","#ffffff"],
+  ["Pastel Sweater","🧶","#b8e4d5"],
+  ["Heart Top","💗","#f5b8aa"],
+  ["Ribbon Blouse","🌸","#f7d995"],
+  ["Summer Top","☀️","#a9c9ef"],
+  ["Elegant Top","✨","#e9a7bd"]
+ ],
+ bottoms:[
+  ["Wide Jeans","👖","#8ba9d4"],
+  ["Pink Mini Skirt","🌸","#f3aaca"],
+  ["Pleated Skirt","🎀","#d6b9f2"],
+  ["White Shorts","☁️","#ffffff"],
+  ["Cute Trousers","💜","#b8e4d5"],
+  ["Denim Shorts","🩵","#a9c9ef"],
+  ["Long Skirt","🌷","#f5b8aa"],
+  ["Black Pants","🖤","#493b55"]
+ ],
+ jackets:[
+  ["Pink Cardigan","🩷","#f3aaca"],
+  ["Lavender Coat","💜","#d6b9f2"],
+  ["Mint Jacket","🌿","#b8e4d5"],
+  ["Blue Blazer","🦋","#a9c9ef"],
+  ["Cream Coat","🤍","#fff1d5"],
+  ["Rose Jacket","🌹","#e9a7bd"]
+ ],
+ hair:hairStyles.map((h,i)=>[h.name,h.emoji,characters[0].hair,i]),
+ shoes:[
+  ["Princess Heels","👠","#f3aaca"],
+  ["Cute Boots","👢","#d6b9f2"],
+  ["Mary Janes","🥿","#b8e4d5"],
+  ["White Sneakers","👟","#ffffff"],
+  ["Pink Sandals","🌸","#f5b8aa"],
+  ["Purple Boots","💜","#a9c9ef"]
+ ],
+ accessories:[
+  ["Pink Bow","🎀","#f3aaca"],
+  ["Flower Crown","🌼","#f7d995"],
+  ["Heart Earrings","💗","#e9a7bd"],
+  ["Cute Glasses","👓","#d6b9f2"],
+  ["Pearl Necklace","📿","#ffffff"],
+  ["Star Hairpin","⭐","#f7d995"],
+  ["Mini Handbag","👜","#f3aaca"],
+  ["Moon Necklace","🌙","#b8e4d5"]
+ ]
 };
 
-let style={...defaults};
+const titles={
+ dresses:"Dream Dresses",tops:"Cute Tops",bottoms:"Skirts & Pants",
+ jackets:"Jackets & Coats",hair:"Dream Hairstyles",
+ shoes:"Shoes Collection",accessories:"Accessories"
+};
 
-function change(type,color){
- style[type]=color;
+let activeTab="dresses";
+let activeCharacter=0;
+let chosenColor="#f3aaca";
+let selected={};
+let currentHair=0;
+let dressColor="#f3aaca";
 
- if(type==='dress')
- document.getElementById('dress').setAttribute('fill',color);
-
- if(type==='hair'){
- document.getElementById('hairBack').setAttribute('fill',color);
- document.getElementById('hairFront').setAttribute('fill',color);
- }
-
- if(type==='shoes'){
- document.getElementById('shoe1').setAttribute('fill',color);
- document.getElementById('shoe2').setAttribute('fill',color);
- }
-
- if(type==='bow'){
- document.querySelectorAll('#bow path').forEach(p=>p.setAttribute('fill',color));
- }
-
- document.getElementById('message').textContent='Beautiful style! ♡';
+function setColor(id,color){
+ const el=$(id);
+ if(el)el.setAttribute("fill",color);
 }
 
-function resetStyle(){
- Object.keys(defaults).forEach(k=>change(k,defaults[k]));
- document.getElementById('message').textContent='Welcome back! ♡';
-}
+function setMessage(t){$("message").textContent=t}
 
-function randomStyle(){
- const colors=['#F4AFCB','#BDA7E8','#A9DCCB','#F5D98E','#E88CA5','#FFFFFF'];
- Object.keys(style).forEach(k=>{
- change(k,colors[Math.floor(Math.random()*colors.length)]);
+function updateCharacter(){
+ const c=characters[activeCharacter];
+ $("girlName").textContent=c.name;
+
+ $("face").setAttribute("fill",c.skin);
+ $("backHair").querySelector("path").setAttribute("fill",c.hair);
+ $("frontHair").querySelector("path").setAttribute("fill",c.hair);
+
+ $("backHair").querySelector("path").setAttribute("d",hairStyles[currentHair].back);
+ $("frontHair").querySelector("path").setAttribute("d",hairStyles[currentHair].front);
+
+ $("hair").children[0].setAttribute("stop-color",c.hair);
+ $("hair").children[1].setAttribute("stop-color",c.hair);
+
+ document.querySelectorAll("#eyes ellipse").forEach(e=>{
+   e.setAttribute("fill",c.eye);
  });
- document.getElementById('message').textContent='Magical new outfit! ✨';
+
+ document.querySelectorAll("#eyes path").forEach(p=>{
+   if(p.getAttribute("stroke")==="#553b64")
+     p.setAttribute("stroke",c.hair);
+ });
+
+ document.querySelectorAll("#girl #legs,#girl #arms,#girl #face").forEach(el=>{
+   if(el.id==="legs"||el.id==="arms")
+     el.querySelectorAll("path").forEach(p=>{
+       if(p.getAttribute("fill")?.includes("url"))
+         p.setAttribute("fill",c.skin);
+     });
+ });
 }
 
-function saveGirl(){
- const svg=document.getElementById('girl').cloneNode(true);
- const data=new XMLSerializer().serializeToString(svg);
- const blob=new Blob([data],{type:'image/svg+xml'});
+function applyItem(type,index,color){
+ const items=catalog[type];
+ if(!items[index])return;
+ const item=items[index];
+
+ if(type==="dresses"){
+  $("dress").style.display="block";
+  $("top").style.display="none";
+  $("bottom").style.display="none";
+  $("jacket").style.display="none";
+  $("dress").querySelector("path").setAttribute("fill",color);
+  dressColor=color;
+  selected.dresses=index;
+ }
+ if(type==="tops"){
+  $("dress").style.display="none";
+  $("top").style.display="block";
+  $("bottom").style.display="block";
+  $("top").querySelector("path").setAttribute("fill",color);
+  selected.tops=index;
+ }
+ if(type==="bottoms"){
+  $("dress").style.display="none";
+  $("top").style.display="block";
+  $("bottom").style.display="block";
+  $("bottom").querySelector("path").setAttribute("fill",color);
+  selected.bottoms=index;
+ }
+ if(type==="jackets"){
+  $("dress").style.display="none";
+  $("top").style.display="block";
+  $("bottom").style.display="block";
+  $("jacket").style.display="block";
+  $("jacket").querySelectorAll("path").forEach(p=>{
+   if(p.getAttribute("fill")!=="none")p.setAttribute("fill",color);
+  });
+  selected.jackets=index;
+ }
+ if(type==="hair"){
+  currentHair=item[3]??index;
+  $("backHair").querySelector("path").setAttribute("fill",color);
+  $("frontHair").querySelector("path").setAttribute("fill",color);
+  selected.hair=index;
+ }
+ if(type==="shoes"){
+  $("shoes").querySelectorAll("path").forEach(p=>p.setAttribute("fill",color));
+  selected.shoes=index;
+ }
+ if(type==="accessories"){
+  const g=$("accessories");
+  g.innerHTML="";
+  const cx=180;
+  if(index===0||index===5){
+   g.innerHTML=`
+    <path d="M105 92 Q68 55 77 104 L110 117Z" fill="${color}"/>
+    <path d="M110 117 Q143 57 150 98 L120 127Z" fill="${color}"/>
+    <circle cx="112" cy="111" r="8" fill="#f7d995"/>`;
+  }else if(index===1){
+   g.innerHTML=`<path d="M112 88 Q180 10 248 88" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round"/>
+   <g fill="${color}"><circle cx="130" cy="70" r="9"/><circle cx="155" cy="55" r="8"/><circle cx="180" cy="49" r="10"/><circle cx="205" cy="55" r="8"/><circle cx="230" cy="70" r="9"/></g>`;
+  }else if(index===2){
+   g.innerHTML=`<circle cx="105" cy="180" r="6" fill="${color}"/><path d="M105 185 L105 202" stroke="${color}" stroke-width="3"/><circle cx="105" cy="207" r="5" fill="${color}"/><circle cx="255" cy="180" r="6" fill="${color}"/><path d="M255 185 L255 202" stroke="${color}" stroke-width="3"/><circle cx="255" cy="207" r="5" fill="${color}"/>`;
+  }else if(index===3){
+   g.innerHTML=`<g fill="none" stroke="${color}" stroke-width="5"><rect x="116" y="135" width="47" height="30" rx="12"/><rect x="197" y="135" width="47" height="30" rx="12"/><path d="M163 146 L197 146"/></g>`;
+  }else if(index===4||index===7){
+   g.innerHTML=`<path d="M145 255 Q180 300 215 255" fill="none" stroke="${color}" stroke-width="5"/><circle cx="180" cy="282" r="7" fill="${color}"/>`;
+  }else if(index===6){
+   g.innerHTML=`<path d="M250 350 Q275 350 270 390 L240 390 L240 370 Q240 350 250 350Z" fill="${color}" stroke="#bd83ae" stroke-width="2"/><path d="M245 355 Q240 335 260 335 Q280 335 275 355" fill="none" stroke="${color}" stroke-width="5"/>`;
+  }
+  selected.accessories=index;
+ }
+ renderItems();
+}
+
+function renderItems(){
+ const data=catalog[activeTab];
+ $("categoryTitle").textContent=titles[activeTab];
+ $("itemCount").textContent=data.length+" styles";
+ $("items").innerHTML="";
+ data.forEach((item,i)=>{
+  const b=document.createElement("button");
+  b.className="item"+(selected[activeTab]===i?" selected":"");
+  b.innerHTML=`<span class="emoji">${item[1]}</span><span class="item-name">${item[0]}</span>`;
+  b.onclick=()=>{
+   chosenColor=item[2];
+   applyItem(activeTab,i,chosenColor);
+   renderSwatches();
+   setMessage(item[0]+" looks beautiful on you! ♡");
+  };
+  $("items").appendChild(b);
+ });
+}
+
+function renderSwatches(){
+ $("swatches").innerHTML="";
+ colors.forEach(color=>{
+  const b=document.createElement("button");
+  b.className="swatch"+(chosenColor===color?" active":"");
+  b.style.background=color;
+  b.title=color;
+  b.onclick=()=>{
+   chosenColor=color;
+   const index=selected[activeTab];
+   if(index!==undefined)applyItem(activeTab,index,color);
+   renderSwatches();
+   setMessage("Your new color is magical! ✨");
+  };
+  $("swatches").appendChild(b);
+ });
+}
+
+$("tabs").addEventListener("click",e=>{
+ const b=e.target.closest("[data-tab]");
+ if(!b)return;
+ activeTab=b.dataset.tab;
+ document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));
+ chosenColor=colors[0];
+ renderItems();
+ renderSwatches();
+});
+
+document.querySelector(".characters").addEventListener("click",e=>{
+ const b=e.target.closest("[data-character]");
+ if(!b)return;
+ activeCharacter=Number(b.dataset.character);
+ document.querySelectorAll(".characters button").forEach(x=>x.classList.toggle("active",x===b));
+ updateCharacter();
+ setMessage("Meet "+characters[activeCharacter].name+"! ♡");
+});
+
+function reset(){
+ $("dress").style.display="none";
+ $("top").style.display="block";
+ $("bottom").style.display="block";
+ $("jacket").style.display="none";
+ $("top").querySelector("path").setAttribute("fill","#f3c4dd");
+ $("bottom").querySelector("path").setAttribute("fill","#bda7e8");
+ $("shoes").querySelectorAll("path").forEach(p=>p.setAttribute("fill","#efb1d1"));
+ $("accessories").innerHTML="";
+ currentHair=0;
+ updateCharacter();
+ selected={};
+ chosenColor="#f3aaca";
+ activeTab="dresses";
+ document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="dresses"));
+ renderItems();
+ renderSwatches();
+ setMessage("Your original look is back! ♡");
+}
+
+$("reset").onclick=reset;
+
+$("random").onclick=()=>{
+ activeCharacter=Math.floor(Math.random()*characters.length);
+ currentHair=Math.floor(Math.random()*hairStyles.length);
+ updateCharacter();
+ const types=["dresses","tops","bottoms","shoes","accessories"];
+ types.forEach(type=>{
+  const i=Math.floor(Math.random()*catalog[type].length);
+  applyItem(type,i,catalog[type][i][2]);
+ });
+ setMessage("A magical new look! ✨");
+});
+
+$("save").onclick=()=>{
+ const svg=$("girl").cloneNode(true);
+ svg.setAttribute("xmlns","http://www.w3.org/2000/svg");
+ const xml=new XMLSerializer().serializeToString(svg);
+ const blob=new Blob([xml],{type:"image/svg+xml;charset=utf-8"});
  const url=URL.createObjectURL(blob);
- const a=document.createElement('a');
- a.href=url;
- a.download='my-anime-girl.svg';
- a.click();
- URL.revokeObjectURL(url);
- document.getElementById('message').textContent='Image saved! 💖';
-}
+ const img=new Image();
+ img.onload=()=>{
+  const canvas=document.createElement("canvas");
+  canvas.width=720;
+  canvas.height=1200;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#f9eaf4";
+  ctx.fillRect(0,0,720,1200);
+  ctx.drawImage(img,0,0,720,1200);
+  const a=document.createElement("a");
+  a.download="anime-dream-look.png";
+  a.href=canvas.toDataURL("image/png");
+  a.click();
+  URL.revokeObjectURL(url);
+  setMessage("Your fashion picture is saved! 💖");
+ };
+ img.onerror=()=>{
+  URL.revokeObjectURL(url);
+  setMessage("Could not save image. Please try again.");
+ };
+ img.src=url;
+};
 
-resetStyle();
+renderItems();
+renderSwatches();
+updateCharacter();
+reset();
 </script>
-
 </body>
 </html>
