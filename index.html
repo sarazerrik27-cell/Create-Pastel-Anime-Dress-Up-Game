@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pastel Anime Dress Up 🎀</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#ffe6f2,#eee5ff,#e3fff4);
+ color:#805f8e;
+ text-align:center;
+}
+header{padding:25px}
+h1{color:#ce83b2}
+.game{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:25px;
+ padding:20px;
+}
+.character,.wardrobe{
+ background:#ffffffc9;
+ border:3px solid white;
+ border-radius:25px;
+ padding:20px;
+ width:min(100%,420px);
+ box-shadow:0 5px 20px #c9a4cf55;
+}
+.character svg{width:100%;max-width:300px}
+.options{
+ display:flex;
+ flex-wrap:wrap;
+ justify-content:center;
+ gap:10px;
+ margin-bottom:20px;
+}
+button{
+ border:0;
+ padding:12px 16px;
+ border-radius:15px;
+ background:#f7d8eb;
+ color:#805f8e;
+ font-weight:bold;
+ cursor:pointer;
+}
+button:hover{background:#eac2e0;transform:scale(1.05)}
+h3{color:#bd83b0}
+#message{font-weight:bold;color:#bd83b0}
+</style>
+</head>
+<body>
+
+<header>
+<h1>♡ Pastel Anime Fashion ♡</h1>
+<p>Create your dream anime outfit!</p>
+</header>
+
+<div class="game">
+
+<div class="character">
+<h2>Your Anime Girl 🎀</h2>
+
+<svg id="girl" viewBox="0 0 300 430">
+
+<!-- Hair behind -->
+<path id="hairBack"
+d="M80 130 Q50 15 150 25 Q250 15 220 130
+L225 300 Q190 320 190 150 L110 150 Q110 320 75 300Z"
+fill="#A879C9"/>
+
+<!-- Neck -->
+<rect x="135" y="185" width="30" height="55" rx="10" fill="#FFE0CE"/>
+
+<!-- Face -->
+<ellipse cx="150" cy="125" rx="65" ry="80" fill="#FFE0CE"/>
+
+<!-- Eyes -->
+<ellipse cx="125" cy="135" rx="10" ry="14" fill="#76518E"/>
+<ellipse cx="175" cy="135" rx="10" ry="14" fill="#76518E"/>
+<circle cx="128" cy="131" r="4" fill="white"/>
+<circle cx="178" cy="131" r="4" fill="white"/>
+
+<!-- Blush -->
+<ellipse cx="105" cy="160" rx="13" ry="6" fill="#F5A6B5"/>
+<ellipse cx="195" cy="160" rx="13" ry="6" fill="#F5A6B5"/>
+
+<!-- Mouth -->
+<path d="M140 175 Q150 185 160 175" fill="none" stroke="#B76C75" stroke-width="3"/>
+
+<!-- Front hair -->
+<path id="hairFront"
+d="M85 120 Q65 15 150 25 Q235 15 215 120
+Q190 80 170 95 Q150 60 130 95 Q105 80 85 120Z"
+fill="#A879C9"/>
+
+<!-- Arms -->
+<path d="M120 225 L95 295 M180 225 L205 295"
+stroke="#FFE0CE" stroke-width="20" stroke-linecap="round"/>
+
+<!-- Dress -->
+<path id="dress"
+d="M120 215 L180 215 L220 330 L80 330Z"
+fill="#F4AFCB"/>
+
+<!-- Legs -->
+<path d="M125 330 L120 390 M175 330 L180 390"
+stroke="#FFE0CE" stroke-width="22" stroke-linecap="round"/>
+
+<!-- Shoes -->
+<ellipse id="shoe1" cx="120" cy="395" rx="23" ry="11" fill="#F1A7C8"/>
+<ellipse id="shoe2" cx="180" cy="395" rx="23" ry="11" fill="#F1A7C8"/>
+
+<!-- Bow -->
+<g id="bow">
+<path d="M95 90 Q65 55 80 105 L110 110Z" fill="#FF8FB8"/>
+<path d="M110 110 Q145 55 145 95 L120 120Z" fill="#FF8FB8"/>
+<circle cx="110" cy="105" r="9" fill="#F5D98E"/>
+</g>
+
+</svg>
+
+<button onclick="randomStyle()">✨ Random Outfit</button>
+<button onclick="resetStyle()">↻ Reset</button>
+<button onclick="saveGirl()">💖 Save Image</button>
+</div>
+
+<div class="wardrobe">
+<h2>♡ Fashion Wardrobe ♡</h2>
+
+<h3>👗 Dresses</h3>
+<div class="options">
+<button onclick="change('dress','#F4AFCB')">Pink</button>
+<button onclick="change('dress','#BDA7E8')">Purple</button>
+<button onclick="change('dress','#A9DCCB')">Mint</button>
+<button onclick="change('dress','#F5D98E')">Yellow</button>
+<button onclick="change('dress','#FFFFFF')">White</button>
+</div>
+
+<h3>💇 Hair</h3>
+<div class="options">
+<button onclick="change('hair','#A879C9')">Purple</button>
+<button onclick="change('hair','#E8A66A')">Blonde</button>
+<button onclick="change('hair','#49343D')">Black</button>
+<button onclick="change('hair','#E88CA5')">Pink</button>
+</div>
+
+<h3>👠 Shoes</h3>
+<div class="options">
+<button onclick="change('shoes','#F1A7C8')">Pink</button>
+<button onclick="change('shoes','#BDA7E8')">Purple</button>
+<button onclick="change('shoes','#A9DCCB')">Mint</button>
+<button onclick="change('shoes','#FFFFFF')">White</button>
+</div>
+
+<h3>🎀 Accessories</h3>
+<div class="options">
+<button onclick="change('bow','#FF8FB8')">Pink Bow</button>
+<button onclick="change('bow','#BDA7E8')">Purple Bow</button>
+<button onclick="change('bow','#F5D98E')">Gold Bow</button>
+<button onclick="change('bow','#A9DCCB')">Mint Bow</button>
+</div>
+
+<p id="message">Welcome to your fashion studio! ♡</p>
+</div>
+</div>
+
+<footer>Made with ♡ Pastel Anime Fashion Studio</footer>
+
+<script>
+const defaults={
+ dress:'#F4AFCB',
+ hair:'#A879C9',
+ shoes:'#F1A7C8',
+ bow:'#FF8FB8'
+};
+
+let style={...defaults};
+
+function change(type,color){
+ style[type]=color;
+
+ if(type==='dress')
+ document.getElementById('dress').setAttribute('fill',color);
+
+ if(type==='hair'){
+ document.getElementById('hairBack').setAttribute('fill',color);
+ document.getElementById('hairFront').setAttribute('fill',color);
+ }
+
+ if(type==='shoes'){
+ document.getElementById('shoe1').setAttribute('fill',color);
+ document.getElementById('shoe2').setAttribute('fill',color);
+ }
+
+ if(type==='bow'){
+ document.querySelectorAll('#bow path').forEach(p=>p.setAttribute('fill',color));
+ }
+
+ document.getElementById('message').textContent='Beautiful style! ♡';
+}
+
+function resetStyle(){
+ Object.keys(defaults).forEach(k=>change(k,defaults[k]));
+ document.getElementById('message').textContent='Welcome back! ♡';
+}
+
+function randomStyle(){
+ const colors=['#F4AFCB','#BDA7E8','#A9DCCB','#F5D98E','#E88CA5','#FFFFFF'];
+ Object.keys(style).forEach(k=>{
+ change(k,colors[Math.floor(Math.random()*colors.length)]);
+ });
+ document.getElementById('message').textContent='Magical new outfit! ✨';
+}
+
+function saveGirl(){
+ const svg=document.getElementById('girl').cloneNode(true);
+ const data=new XMLSerializer().serializeToString(svg);
+ const blob=new Blob([data],{type:'image/svg+xml'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='my-anime-girl.svg';
+ a.click();
+ URL.revokeObjectURL(url);
+ document.getElementById('message').textContent='Image saved! 💖';
+}
+
+resetStyle();
+</script>
+
+</body>
+</html>
